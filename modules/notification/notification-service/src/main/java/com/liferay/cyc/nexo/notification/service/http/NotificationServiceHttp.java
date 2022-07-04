@@ -14,15 +14,23 @@
 
 package com.liferay.cyc.nexo.notification.service.http;
 
+import com.liferay.cyc.nexo.notification.service.NotificationServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.HttpPrincipal;
+import com.liferay.portal.kernel.service.http.TunnelUtil;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
+
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides the HTTP utility for the
- * <code>com.liferay.cyc.nexo.notification.service.NotificationServiceUtil</code> service
+ * <code>NotificationServiceUtil</code> service
  * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * <code>com.liferay.portal.kernel.security.auth.HttpPrincipal</code> parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -45,4 +53,307 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public class NotificationServiceHttp {
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			addNotification(
+				HttpPrincipal httpPrincipal, long groupId, long toUserId,
+				boolean read, java.util.Map<java.util.Locale, String> titleMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "addNotification",
+				_addNotificationParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, toUserId, read, titleMap, descriptionMap,
+				serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.cyc.nexo.notification.model.Notification)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			deleteNotification(HttpPrincipal httpPrincipal, long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "deleteNotification",
+				_deleteNotificationParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, notificationId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.cyc.nexo.notification.model.Notification)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			getNotification(HttpPrincipal httpPrincipal, long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "getNotification",
+				_getNotificationParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, notificationId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.cyc.nexo.notification.model.Notification)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List
+		<com.liferay.cyc.nexo.notification.model.Notification>
+			getNotificationsByToUserId(
+				HttpPrincipal httpPrincipal, long toUserId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "getNotificationsByToUserId",
+				_getNotificationsByToUserIdParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, toUserId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.util.List
+				<com.liferay.cyc.nexo.notification.model.Notification>)
+					returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List
+		<com.liferay.cyc.nexo.notification.model.Notification>
+			getNotificationsbyKeyWords(
+				HttpPrincipal httpPrincipal, long toUserId, boolean read,
+				String keywords, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.cyc.nexo.notification.model.Notification>
+						orderByComparator) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "getNotificationsbyKeyWords",
+				_getNotificationsbyKeyWordsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, toUserId, read, keywords, start, end,
+				orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.util.List
+				<com.liferay.cyc.nexo.notification.model.Notification>)
+					returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static long getNotificationsCountByKeywords(
+		HttpPrincipal httpPrincipal, long toUserId, boolean read,
+		String keywords) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class,
+				"getNotificationsCountByKeywords",
+				_getNotificationsCountByKeywordsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, toUserId, read, keywords);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return ((Long)returnObj).longValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			updateNotification(
+				HttpPrincipal httpPrincipal, long notificationId, long toUserId,
+				boolean read, java.util.Map<java.util.Locale, String> titleMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				NotificationServiceUtil.class, "updateNotification",
+				_updateNotificationParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, notificationId, toUserId, read, titleMap,
+				descriptionMap, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.cyc.nexo.notification.model.Notification)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		NotificationServiceHttp.class);
+
+	private static final Class<?>[] _addNotificationParameterTypes0 =
+		new Class[] {
+			long.class, long.class, boolean.class, java.util.Map.class,
+			java.util.Map.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteNotificationParameterTypes1 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getNotificationParameterTypes2 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getNotificationsByToUserIdParameterTypes3 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getNotificationsbyKeyWordsParameterTypes4 =
+		new Class[] {
+			long.class, boolean.class, String.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[]
+		_getNotificationsCountByKeywordsParameterTypes5 = new Class[] {
+			long.class, boolean.class, String.class
+		};
+	private static final Class<?>[] _updateNotificationParameterTypes6 =
+		new Class[] {
+			long.class, long.class, boolean.class, java.util.Map.class,
+			java.util.Map.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+
 }

@@ -14,11 +14,21 @@
 
 package com.liferay.cyc.nexo.notification.service.http;
 
+import com.liferay.cyc.nexo.notification.service.NotificationServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
+
+import java.rmi.RemoteException;
+
+import java.util.Locale;
+import java.util.Map;
+
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.cyc.nexo.notification.service.NotificationServiceUtil</code> service
+ * <code>NotificationServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -57,4 +67,170 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public class NotificationServiceSoap {
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap
+			addNotification(
+				long groupId, long toUserId, boolean read,
+				String[] titleMapLanguageIds, String[] titleMapValues,
+				String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
+
+			com.liferay.cyc.nexo.notification.model.Notification returnValue =
+				NotificationServiceUtil.addNotification(
+					groupId, toUserId, read, titleMap, descriptionMap,
+					serviceContext);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap
+			deleteNotification(long notificationId)
+		throws RemoteException {
+
+		try {
+			com.liferay.cyc.nexo.notification.model.Notification returnValue =
+				NotificationServiceUtil.deleteNotification(notificationId);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap
+			getNotification(long notificationId)
+		throws RemoteException {
+
+		try {
+			com.liferay.cyc.nexo.notification.model.Notification returnValue =
+				NotificationServiceUtil.getNotification(notificationId);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap[]
+			getNotificationsByToUserId(long toUserId)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
+				returnValue =
+					NotificationServiceUtil.getNotificationsByToUserId(
+						toUserId);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap[]
+			getNotificationsbyKeyWords(
+				long toUserId, boolean read, String keywords, int start,
+				int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.cyc.nexo.notification.model.Notification>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
+				returnValue =
+					NotificationServiceUtil.getNotificationsbyKeyWords(
+						toUserId, read, keywords, start, end,
+						orderByComparator);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getNotificationsCountByKeywords(
+			long toUserId, boolean read, String keywords)
+		throws RemoteException {
+
+		try {
+			long returnValue =
+				NotificationServiceUtil.getNotificationsCountByKeywords(
+					toUserId, read, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.NotificationSoap
+			updateNotification(
+				long notificationId, long toUserId, boolean read,
+				String[] titleMapLanguageIds, String[] titleMapValues,
+				String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
+
+			com.liferay.cyc.nexo.notification.model.Notification returnValue =
+				NotificationServiceUtil.updateNotification(
+					notificationId, toUserId, read, titleMap, descriptionMap,
+					serviceContext);
+
+			return com.liferay.cyc.nexo.notification.model.NotificationSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		NotificationServiceSoap.class);
+
 }

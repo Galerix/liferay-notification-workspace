@@ -33,6 +33,61 @@ public class NotificationServiceWrapper
 		_notificationService = notificationService;
 	}
 
+	@Override
+	public com.liferay.cyc.nexo.notification.model.Notification addNotification(
+			long groupId, long toUserId, boolean read,
+			java.util.Map<java.util.Locale, String> titleMap,
+			java.util.Map<java.util.Locale, String> descriptionMap,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _notificationService.addNotification(
+			groupId, toUserId, read, titleMap, descriptionMap, serviceContext);
+	}
+
+	@Override
+	public com.liferay.cyc.nexo.notification.model.Notification
+			deleteNotification(long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _notificationService.deleteNotification(notificationId);
+	}
+
+	@Override
+	public com.liferay.cyc.nexo.notification.model.Notification getNotification(
+			long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _notificationService.getNotification(notificationId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
+		getNotificationsbyKeyWords(
+			long toUserId, boolean read, String keywords, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.cyc.nexo.notification.model.Notification>
+					orderByComparator) {
+
+		return _notificationService.getNotificationsbyKeyWords(
+			toUserId, read, keywords, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
+		getNotificationsByToUserId(long toUserId) {
+
+		return _notificationService.getNotificationsByToUserId(toUserId);
+	}
+
+	@Override
+	public long getNotificationsCountByKeywords(
+		long toUserId, boolean read, String keywords) {
+
+		return _notificationService.getNotificationsCountByKeywords(
+			toUserId, read, keywords);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -41,6 +96,20 @@ public class NotificationServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _notificationService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.cyc.nexo.notification.model.Notification
+			updateNotification(
+				long notificationId, long toUserId, boolean read,
+				java.util.Map<java.util.Locale, String> titleMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _notificationService.updateNotification(
+			notificationId, toUserId, read, titleMap, descriptionMap,
+			serviceContext);
 	}
 
 	@Override

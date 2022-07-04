@@ -130,8 +130,8 @@ public class NotificationLocalServiceImpl
 		return notificationLocalService.dynamicQuery(getKeywordSearchDynamicQuery(toUserId, read, keywords), start, end, orderByComparator);
 	}
 	
-	public List<Notification>getNotificationsByKeywords(long toUserId,boolean read, String keywords){
-		return notificationLocalService.dynamicQuery(getKeywordSearchDynamicQuery(toUserId,read, keywords));
+	public long getNotificationsCountByKeywords(long toUserId,boolean read, String keywords){
+		return notificationLocalService.dynamicQueryCount(getKeywordSearchDynamicQuery(toUserId, read, keywords));
 	}
 	
 	private DynamicQuery getKeywordSearchDynamicQuery(
@@ -164,5 +164,7 @@ public class NotificationLocalServiceImpl
 	public Notification updateNotification(Notification notification) {
 		throw new UnsupportedOperationException("Not supported.");
 	}
+
+
 
 }

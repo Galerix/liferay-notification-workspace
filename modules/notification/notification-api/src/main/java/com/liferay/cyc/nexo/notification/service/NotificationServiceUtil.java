@@ -39,6 +39,58 @@ public class NotificationServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.cyc.nexo.notification.service.impl.NotificationServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			addNotification(
+				long groupId, long toUserId, boolean read,
+				java.util.Map<java.util.Locale, String> titleMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addNotification(
+			groupId, toUserId, read, titleMap, descriptionMap, serviceContext);
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			deleteNotification(long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deleteNotification(notificationId);
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			getNotification(long notificationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getNotification(notificationId);
+	}
+
+	public static java.util.List
+		<com.liferay.cyc.nexo.notification.model.Notification>
+			getNotificationsbyKeyWords(
+				long toUserId, boolean read, String keywords, int start,
+				int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.cyc.nexo.notification.model.Notification>
+						orderByComparator) {
+
+		return getService().getNotificationsbyKeyWords(
+			toUserId, read, keywords, start, end, orderByComparator);
+	}
+
+	public static java.util.List
+		<com.liferay.cyc.nexo.notification.model.Notification>
+			getNotificationsByToUserId(long toUserId) {
+
+		return getService().getNotificationsByToUserId(toUserId);
+	}
+
+	public static long getNotificationsCountByKeywords(
+		long toUserId, boolean read, String keywords) {
+
+		return getService().getNotificationsCountByKeywords(
+			toUserId, read, keywords);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -47,6 +99,19 @@ public class NotificationServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.cyc.nexo.notification.model.Notification
+			updateNotification(
+				long notificationId, long toUserId, boolean read,
+				java.util.Map<java.util.Locale, String> titleMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateNotification(
+			notificationId, toUserId, read, titleMap, descriptionMap,
+			serviceContext);
 	}
 
 	public static NotificationService getService() {

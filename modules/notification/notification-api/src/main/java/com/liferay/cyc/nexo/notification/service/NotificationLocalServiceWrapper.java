@@ -303,15 +303,6 @@ public class NotificationLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
 		getNotificationsByKeywords(
-			long toUserId, boolean read, String keywords) {
-
-		return _notificationLocalService.getNotificationsByKeywords(
-			toUserId, read, keywords);
-	}
-
-	@Override
-	public java.util.List<com.liferay.cyc.nexo.notification.model.Notification>
-		getNotificationsByKeywords(
 			long toUserId, boolean read, String keywords, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<com.liferay.cyc.nexo.notification.model.Notification>
@@ -395,6 +386,14 @@ public class NotificationLocalServiceWrapper
 	@Override
 	public int getNotificationsCount() {
 		return _notificationLocalService.getNotificationsCount();
+	}
+
+	@Override
+	public long getNotificationsCountByKeywords(
+		long toUserId, boolean read, String keywords) {
+
+		return _notificationLocalService.getNotificationsCountByKeywords(
+			toUserId, read, keywords);
 	}
 
 	/**

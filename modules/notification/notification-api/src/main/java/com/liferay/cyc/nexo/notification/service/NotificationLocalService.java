@@ -246,10 +246,6 @@ public interface NotificationLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Notification> getNotificationsByKeywords(
-		long toUserId, boolean read, String keywords);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Notification> getNotificationsByKeywords(
 		long toUserId, boolean read, String keywords, int start, int end,
 		OrderByComparator<Notification> orderByComparator);
 
@@ -299,6 +295,10 @@ public interface NotificationLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getNotificationsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getNotificationsCountByKeywords(
+		long toUserId, boolean read, String keywords);
 
 	/**
 	 * Returns the OSGi service identifier.
