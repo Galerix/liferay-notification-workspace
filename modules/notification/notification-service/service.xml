@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_2_0.dtd">
+
+<service-builder dependency-injector="ds"
+	package-path="com.liferay.cyc.nexo.notification">
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" 
+		remote-service="false" session-factory="sampleSessionFactory" table="foo" 
+		tx-manager="sampleTransactionManager uuid="true""> -->
+	<namespace>Notification</namespace>
+	<entity local-service="true" name="Notification"
+		remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="notificationId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="fromUserId" type="long" />
+		<column name="fromApp" type="String" />
+		<column name="toUserId" type="long" />
+		<column name="read" type="boolean" />
+		<column name="title" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
+		
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Find by groupId -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId"></finder-column>
+		</finder>
+		
+		<finder name="ToUserId" return-type="Collection">
+			<finder-column name="toUserId"></finder-column>
+		</finder>
+		
+		<finder name="ToUserIdRead" return-type="Collection">
+			<finder-column name="toUserId"></finder-column>
+			<finder-column name="read"></finder-column>
+		</finder>
+
+		<!-- Reference to Group entity service -->
+
+		<reference entity="Group" package-path="com.liferay.portal"></reference>
+
+		<!-- Entity services needed for the integration to Asset framework -->
+
+		<reference entity="AssetEntry"
+			package-path="com.liferay.portlet.asset"></reference>
+		<reference entity="AssetLink"
+			package-path="com.liferay.portlet.asset"></reference>
+		<reference entity="AssetTag"
+			package-path="com.liferay.portlet.asset"></reference>
+
+	</entity>
+		<exceptions>
+		<exception>NotificationValidation</exception>
+	</exceptions>
+</service-builder>

@@ -1,0 +1,20 @@
+create table Notification_Notification (
+	uuid_ VARCHAR(75) null,
+	notificationId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	fromUserId LONG,
+	fromApp VARCHAR(75) null,
+	toUserId LONG,
+	read_ BOOLEAN,
+	title STRING null,
+	description STRING null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
+);

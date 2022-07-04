@@ -1,0 +1,10 @@
+Bundle-Name: notification-api
+Bundle-SymbolicName: com.liferay.cyc.nexo.notification.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.cyc.nexo.notification.exception,\
+	com.liferay.cyc.nexo.notification.model,\
+	com.liferay.cyc.nexo.notification.service,\
+	com.liferay.cyc.nexo.notification.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../notification-service/service.xml
